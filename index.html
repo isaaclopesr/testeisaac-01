@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaiak - Perfume Refrescante</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 50, 80, 0.4);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
+    }
+
+    .content h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .content p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background-color: #006d77;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      color: white;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #005056;
+    }
+
+    .section, .catalog {
+      padding: 4rem 2rem;
+      background-color: #e0f7fa;
+      color: #004d40;
+      text-align: center;
+    }
+
+    .section h2, .catalog h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section p, .catalog p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+    }
+
+    .catalog-container {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .catalog-item {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1586162542979-bfc15f18dd35?auto=format&fit=crop&w=500&q=80') no-repeat center center/cover;
+      color: white;
+      border-radius: 10px;
+      width: 300px;
+      height: 400px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+    }
+
+    .catalog-item:hover {
+      transform: scale(1.08);
+    }
+
+    .catalog-item h3 {
+      margin: 0;
+      font-size: 1.7rem;
+      background: rgba(0,0,0,0.5);
+      padding: 0.5rem;
+    }
+
+    .catalog-item p {
+      font-size: 1.1rem;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem;
+      margin-top: 0.5rem;
+      line-height: 1.5;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .catalog-item:hover p {
+        opacity: 1;
+        pointer-events: auto;
+        user-select: auto;
+      }
+    }
+
+    .catalog-item.active p {
+      opacity: 1 !important;
+      pointer-events: auto;
+      user-select: auto;
+    }
+
+    .footer {
+      background-color: #003d3d;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+  <script>
+    function mostrarCatalogo() {
+      const container = document.querySelector('.catalog-container');
+      container.style.display = 'flex';
+      window.scrollTo({ top: container.offsetTop, behavior: 'smooth' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.catalog-item');
+
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          if(item.classList.contains('active')) {
+            item.classList.remove('active');
+          } else {
+            items.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Perfume Kaiak</h1>
+      <p>Inspirado na natureza aquática, Kaiak é frescor, liberdade e energia em um frasco.</p>
+      <button class="cta-button" onclick="mostrarCatalogo()">Descubra o Kaiak</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Sinta o Frescor da Água</h2>
+    <p>Kaiak combina notas marinhas, cítricas e amadeiradas para uma experiência olfativa única e marcante. Ideal para quem busca leveza e vitalidade no dia a dia.</p>
+  </section>
+
+  <section id="catalogoKaiak" class="catalog">
+    <h2>Catálogo de Perfumes Kaiak</h2>
+    <div class="catalog-container">
+      <div class="catalog-item">
+        <h3>Kaiak Clássico</h3>
+        <p>Um clássico que evoca o frescor das águas cristalinas. Combinando notas aquáticas, cítricas e verdes, é ideal para o dia a dia. Composição: álcool, água, fragrância, limoneno.</p>
+      </div>
+      <div class="catalog-item">
+        <h3>Kaiak Aventura</h3>
+        <p>Inspirado na emoção de explorar a natureza, com notas de menta, musk e madeiras. Composição: álcool, essência de menta, musk sintético. Perfeito para quem busca liberdade.</p>
+      </div>
+      <div class="catalog-item">
+        <h3>Kaiak Urbe</h3>
+        <p>Para o homem moderno e urbano, traz notas de especiarias, âmbar e madeiras. Composição: álcool, fragrância urbana, patchouli. Sofisticação em cada gota.</p>
+      </div>
+      <div class="catalog-item">
+        <h3>Kaiak Oceano</h3>
+        <p>Evoca a imensidão dos mares com notas marinhas profundas e lavanda. Composição: água, fragrância oceânica, lavanda. Um mergulho refrescante e elegante.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 Perfume Kaiak. Todos os direitos reservados.<br />
+    by Isaac Lopes Rosa
+  </footer>
+</body>
+</html>
